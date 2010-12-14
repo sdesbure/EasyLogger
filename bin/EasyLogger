@@ -1,0 +1,96 @@
+#!/usr/bin/ruby
+# 1.9 adds realpath to resolve symlinks; 1.8 doesn't
+# have this method, so we add it so we get resolved symlinks
+# and compatibility
+unless File.respond_to? :realpath
+  class File
+    def self.realpath path
+      return realpath(File.readlink(path)) if symlink?(path)
+      path
+    end
+  end
+end
+$: << File.expand_path(File.dirname(File.realpath(__FILE__)) + '/../lib')
+require 'rubygems'
+require 'gli'
+require 'EasyLogger_version'
+
+include GLI
+
+version EasyLogger::VERSION
+
+desc 'tail-mode'
+long_desc 'if set, easy logger will show only the new lines'
+switch [:t, :tailmode]
+
+desc 'file-mode'
+long_desc <<EOS
+if set, easy logger will sho only the matching past line of the file and exit.
+if both file-mode and tail-mode is activated, file-mode will be chosen.
+EOS
+switch [:f, :filemode]
+
+desc 'verbose'
+long_desc 'Switch to verbose mode where more outputs will be shown'
+switch [:v, :verbose]
+
+desc 'model(s) to match'
+long_desc 'The model(s) to match in the log file. Can be mixed with method to match'
+flag [:m, :model]
+
+desc 'method(s) to match'
+long_desc 'The method(s) to match in the log file. Can be mixed with model to match'
+flag [:n, :method]
+
+desc 'View the line matching model and/or methods on a log file in command line'
+long_desc <<EOS
+This will display the lines of the log file matching the model and/or the method
+in a command line mode.
+If tail-mode is set, only the new lines matching will be displayed whereas if
+file-mode is set, it will be only the the already logged lines matching that will 
+be displayed. Without any of these options, both of them will be displayed.
+EOS
+arg_name 'log_file [command]'
+command [:text] do |c|
+  c.action do |g,o,args|
+    if args.length < 1
+      raise 'You must specify the name of the log file'
+    end
+    start_time = Time.now
+    puts "Log file to look at: #{args[0]}" if g[:v]
+    puts "  * Model to match: #{g[:m]}" if g[:v] && !g[:m]
+    puts "  * Method to match: #{g[:n]}" if g[:v] && !g[:n]
+    puts "  - Tail Mode activated" if g[:v] && g[:t] && !g[:f]
+    puts "  - Tail Mode activated by command line but disabled by file-mode" if g[:v] && g[:t] && g[:f]
+    puts "  - File Mode activated" if g[:v] && g[:f]
+    g[:t] = !(g[:t] && g[:f])
+    stats_file = {:lines => 0, :matched => 0}
+    stats_tail = {:lines => 0, :matched => 0}
+    stats_file = EasyLogger.file(args[0],g[:m],g[:n],g[:v]) unless g[:t]
+    stats_tail = EasyLogger.tail(args[0],g[:m],g[:n],g[:v]) unless g[:f]    
+    puts " Line processed: #{stats_file[:lines] + stats_tail[:lines]}
+(#{stats_file[:matched] + stats_tail[:matched]} matched) in 
+    #{(Time.now - start_time).to_i} seconds"
+    
+    
+  end
+end
+
+pre do |global,command,options,args|
+  # Pre logic here
+  # Return true to proceed; false to abort and not call the
+  # chosen command
+  true
+end
+
+post do |global,command,options,args|
+  # Post logic here
+end
+
+on_error do |exception|
+  # Error logic here
+  # return false to skip default error handling
+  true
+end
+
+exit GLI.run(ARGV)

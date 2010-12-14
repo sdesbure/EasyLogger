@@ -1,0 +1,1 @@
+require 'easy_logger/easy_logger'

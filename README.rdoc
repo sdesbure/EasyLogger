@@ -1,0 +1,6 @@
+= EasyLogger
+
+Describe your project here
+
+:include:EasyLogger.rdoc
+

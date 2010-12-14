@@ -1,0 +1,7 @@
+pkg/*
+*.gem
+.bundle
+nbproject/**/*
+nbproject
+.yardoc
+.yardoc/**/*
