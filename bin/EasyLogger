@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby -W0
 # 1.9 adds realpath to resolve symlinks; 1.8 doesn't
 # have this method, so we add it so we get resolved symlinks
 # and compatibility
@@ -34,18 +34,18 @@ desc 'verbose'
 long_desc 'Switch to verbose mode where more outputs will be shown'
 switch [:v, :verbose]
 
-desc 'model(s) to match'
-long_desc 'The model(s) to match in the log file. Can be mixed with method to match'
-flag [:m, :model]
+desc 'classe(s) to match'
+long_desc 'The classe(s) to match in the log file. Can be mixed with method to match'
+flag [:c, :class]
 
 desc 'method(s) to match'
-long_desc 'The method(s) to match in the log file. Can be mixed with model to match'
-flag [:n, :method]
+long_desc 'The method(s) to match in the log file. Can be mixed with class to match'
+flag [:m, :method]
 
 desc 'View the line matching model and/or methods on a log file in command line'
 long_desc <<EOS
 This will display the lines of the log file matching the model and/or the method
-in a command line mode.
+in a command line .
 If tail-mode is set, only the new lines matching will be displayed whereas if
 file-mode is set, it will be only the the already logged lines matching that will 
 be displayed. Without any of these options, both of them will be displayed.
@@ -58,16 +58,16 @@ command [:text] do |c|
     end
     start_time = Time.now
     puts "Log file to look at: #{args[0]}" if g[:v]
-    puts "  * Model to match: #{g[:m]}" if g[:v] && !g[:m]
-    puts "  * Method to match: #{g[:n]}" if g[:v] && !g[:n]
+    puts "  * Class to match: #{g[:c]}" if g[:v] && g[:c]
+    puts "  * Method to match: #{g[:m]}" if g[:v] && g[:m]
     puts "  - Tail Mode activated" if g[:v] && g[:t] && !g[:f]
     puts "  - Tail Mode activated by command line but disabled by file-mode" if g[:v] && g[:t] && g[:f]
     puts "  - File Mode activated" if g[:v] && g[:f]
     g[:t] = !(g[:t] && g[:f])
     stats_file = {:lines => 0, :matched => 0}
     stats_tail = {:lines => 0, :matched => 0}
-    stats_file = EasyLogger.file(args[0],g[:m],g[:n],g[:v]) unless g[:t]
-    stats_tail = EasyLogger.tail(args[0],g[:m],g[:n],g[:v]) unless g[:f]    
+    stats_file = EasyLogger.file(args[0],g[:c],g[:m],g[:v]) unless g[:t]
+    stats_tail = EasyLogger.tail(args[0],g[:c],g[:m],g[:v]) unless g[:f]    
     puts " Line processed: #{stats_file[:lines] + stats_tail[:lines]}
 (#{stats_file[:matched] + stats_tail[:matched]} matched) in 
     #{(Time.now - start_time).to_i} seconds"
