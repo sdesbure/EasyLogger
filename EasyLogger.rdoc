@@ -1,35 +1,10 @@
 = <tt>EasyLogger</tt>
 
-    EasyLogger [global options] command_name [command-specific options] [--] arguments...
+    EasyLogger command_name [command-specific options] [--] arguments...
 
 * Use the command +help+ to get a summary of commands
 * Use the command <tt>help command_name</tt> to get a help for +command_name+
 * Use <tt>--</tt> to stop command line argument processing; useful if your arguments have dashes in them
-
-== Global Options
-These options are available for any command and are specified before the name of the command
-
-[<tt>-f, --filemode</tt>] file-mode
-
-                          if set, easy logger will sho only the matching past line of the file and exit.
-if both file-mode and tail-mode is activated, file-mode will be chosen.
-
-
-[<tt>-m, --model=arg</tt>] model(s) to match
-
-                           The model(s) to match in the log file. Can be mixed with method to match
-
-[<tt>-n, --method=arg</tt>] method(s) to match
-
-                            The method(s) to match in the log file. Can be mixed with model to match
-
-[<tt>-t, --tailmode</tt>] tail-mode
-
-                          if set, easy logger will show only the new lines
-
-[<tt>-v, --verbose</tt>] verbose
-
-                         Switch to verbose mode where more outputs will be shown
 
 == Commands
 [<tt>help</tt>] Shows list of commands or help for one command
@@ -50,9 +25,38 @@ These options are specified *after* the command.
 View the line matching model and/or methods on a log file in command line
 
 This will display the lines of the log file matching the model and/or the method
-in a command line mode.
+in a command line .
 If tail-mode is set, only the new lines matching will be displayed whereas if
 file-mode is set, it will be only the the already logged lines matching that will 
 be displayed. Without any of these options, both of them will be displayed.
 
+
+==== Options
+These options are specified *after* the command.
+
+[<tt>-c, --class=arg</tt>] classe(s) to match
+
+                           The classe(s) to match in the log file. Can be mixed with method to match.
+To put several classes, use a comma without space. Example -c Class1,Class2
+
+
+[<tt>-f, --filemode</tt>] file-mode
+
+                          if set, easy logger will sho only the matching past line of the file and exit.
+if both file-mode and tail-mode is activated, file-mode will be chosen.
+
+
+[<tt>-m, --method=arg</tt>] method(s) to match
+
+                            The method(s) to match in the log file. Can be mixed with class to match.
+To put several methods, use a comma without space. Example -m Method1,Method2
+
+
+[<tt>-t, --tailmode</tt>] tail-mode
+
+                          if set, easy logger will show only the new lines
+
+[<tt>-v, --verbose</tt>] verbose
+
+                         Switch to verbose mode where more outputs will be shown
 

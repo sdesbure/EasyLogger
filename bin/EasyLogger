@@ -14,33 +14,11 @@ $: << File.expand_path(File.dirname(File.realpath(__FILE__)) + '/../lib')
 require 'rubygems'
 require 'gli'
 require 'EasyLogger_version'
+require 'easy_logger'
 
 include GLI
 
 version EasyLogger::VERSION
-
-desc 'tail-mode'
-long_desc 'if set, easy logger will show only the new lines'
-switch [:t, :tailmode]
-
-desc 'file-mode'
-long_desc <<EOS
-if set, easy logger will sho only the matching past line of the file and exit.
-if both file-mode and tail-mode is activated, file-mode will be chosen.
-EOS
-switch [:f, :filemode]
-
-desc 'verbose'
-long_desc 'Switch to verbose mode where more outputs will be shown'
-switch [:v, :verbose]
-
-desc 'classe(s) to match'
-long_desc 'The classe(s) to match in the log file. Can be mixed with method to match'
-flag [:c, :class]
-
-desc 'method(s) to match'
-long_desc 'The method(s) to match in the log file. Can be mixed with class to match'
-flag [:m, :method]
 
 desc 'View the line matching model and/or methods on a log file in command line'
 long_desc <<EOS
@@ -52,27 +30,57 @@ be displayed. Without any of these options, both of them will be displayed.
 EOS
 arg_name 'log_file [command]'
 command [:text] do |c|
+  c.  desc 'tail-mode'
+  c.long_desc 'if set, easy logger will show only the new lines'
+  c.switch [:t, :tailmode]
+
+  c.desc 'file-mode'
+  c.long_desc <<EOS
+if set, easy logger will sho only the matching past line of the file and exit.
+if both file-mode and tail-mode is activated, file-mode will be chosen.
+EOS
+  c.switch [:f, :filemode]
+
+  c.desc 'verbose'
+  c.long_desc 'Switch to verbose mode where more outputs will be shown'
+  c.switch [:v, :verbose]
+
+  c.desc 'classe(s) to match'
+  c.long_desc <<EOS 
+The classe(s) to match in the log file. Can be mixed with method to match.
+To put several classes, use a comma without space. Example -c Class1,Class2
+EOS
+  c.flag [:c, :class]
+
+  c.desc 'method(s) to match'
+  c.long_desc <<EOS 
+The method(s) to match in the log file. Can be mixed with class to match.
+To put several methods, use a comma without space. Example -m Method1,Method2
+EOS
+  c.flag [:m, :method]
   c.action do |g,o,args|
     if args.length < 1
       raise 'You must specify the name of the log file'
     end
+    
     start_time = Time.now
-    puts "Log file to look at: #{args[0]}" if g[:v]
-    puts "  * Class to match: #{g[:c]}" if g[:v] && g[:c]
-    puts "  * Method to match: #{g[:m]}" if g[:v] && g[:m]
-    puts "  - Tail Mode activated" if g[:v] && g[:t] && !g[:f]
-    puts "  - Tail Mode activated by command line but disabled by file-mode" if g[:v] && g[:t] && g[:f]
-    puts "  - File Mode activated" if g[:v] && g[:f]
-    g[:t] = !(g[:t] && g[:f])
-    stats_file = {:lines => 0, :matched => 0}
-    stats_tail = {:lines => 0, :matched => 0}
-    stats_file = EasyLogger.file(args[0],g[:c],g[:m],g[:v]) unless g[:t]
-    stats_tail = EasyLogger.tail(args[0],g[:c],g[:m],g[:v]) unless g[:f]    
-    puts " Line processed: #{stats_file[:lines] + stats_tail[:lines]}
-(#{stats_file[:matched] + stats_tail[:matched]} matched) in 
-    #{(Time.now - start_time).to_i} seconds"
     
+    puts "Log file to look at: #{args[0]}" if o[:v]
+    puts "  * Class to match: #{o[:c]}" if o[:v] && o[:c]
+    puts "  * Method to match: #{o[:m]}" if o[:v] && o[:m]
+    puts "  - Tail Mode activated" if o[:v] && o[:t] && !o[:f]
+    puts "  - Tail Mode activated by command line but disabled by file-mode" if o[:v] && o[:t] && o[:f]
+    puts "  - File Mode activated" if o[:v] && o[:f]
+    o[:t] = false if (o[:t] && o[:f])
+    unless o[:t] || o[:f]
+      o[:t] = true 
+      o[:f] = true 
+    end
     
+    easylog = EasyLogger::EasyLogger.new
+    easylog.file(args[0],o[:c],o[:m],o[:v]) if o[:f]
+    easylog.tail(args[0],  o[:c],o[:m],o[:v]) if o[:t]    
+    puts " Line(s) processed in #{(Time.now - start_time).to_i} seconds" if o[:v]
   end
 end
 
