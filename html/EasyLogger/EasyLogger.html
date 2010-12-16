@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: EasyLogger::EasyLogger</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/easy_logger/easy_logger_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/easy_logger/easy_logger.rb">lib/easy_logger/easy_logger.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-file">#file</a></li>
+					
+					<li><a href="#method-i-match">#match</a></li>
+					
+					<li><a href="#method-i-tail">#tail</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../EasyLogger.html">EasyLogger</a></li>
+				
+					<li><a href="../EasyLogger/EasyLogger.html">EasyLogger::EasyLogger</a></li>
+				
+					<li><a href="../File.html">File</a></li>
+				
+					<li><a href="../Logging.html">Logging</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">EasyLogger::EasyLogger</h1>
+
+		<div id="description">
+			<h1>Class <a href="EasyLogger.html">EasyLogger</a> which will do all the job of matching the lines and showing it</h1>
+<p>
+@author Sylvain Desbureaux
+</p>
+<h2>Attributes</h2>
+<p>
+@attr_reader [String]     log    the log file/stream that we&#8217;ll look
+into @attr_reader [Array]   classes   the classes to match in the log
+@attr_reader [Array]   methods   the methods to match in the log
+@attr_reader [Boolean] verbose   the verbosity of the output @attr_reader
+[String]  separator the separator of the values in the log. it&#8217;s
+&#8220;|&#8221; per default
+</p>
+<h2>Use</h2>
+<p>
+There&#8217;s two methods to use the class: file() and tail(). Both of them
+use the same parameters (the attributes of the class). The log file need to
+be correctly formatted. the parser assumes that the log file has this
+format (with &#8217;|&#8217; as separator in the example):
+</p>
+<pre>
+    |some tag (example: the date and time)|some tag|...|class|method| free text
+</pre>
+<p>
+The Separator could be at the end of the free text but never in the middle
+so choose it carefully! @see <a href="../Logging.html">Logging</a> a
+working logger example
+</p>
+<h3><a href="../File.html">File</a></h3>
+<p>
+<a href="../File.html">File</a> will open the stream, parse and output the
+matching line and exit
+</p>
+<h3>Tail</h3>
+<p>
+Tail will open the end of the stream and parse and output the matching line
+and exit
+</p>
+
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="file-method" class="method-detail ">
+				<a name="method-i-file"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">file</span><span
+						class="method-args">(log, classes, methods, verbose, separator='|')</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Display the relevant line of the log matching the classes/methods
+</p>
+<p>
+@param [String]  log       the log file/stream that we&#8217;ll look into
+@param [String]   classes   the classes to match in the log @param [String]
+methods   the methods to match in the log @param [Boolean] verbose   the
+verbosity of the output @param [String]  separator the separator of the
+values in the log. it&#8217;s &#8220;|&#8221; per default
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="file-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/easy_logger/easy_logger.rb, line 37</span>
+37:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file</span>(<span class="ruby-identifier">log</span>, <span class="ruby-identifier">classes</span>, <span class="ruby-identifier">methods</span>, <span class="ruby-identifier">verbose</span>, <span class="ruby-identifier">separator</span>=<span class="ruby-value str">'|'</span>)
+38:       <span class="ruby-identifier">result</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+39:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Looking in #{log} I/O for line matching #{classes} classe(s) and #{methods} method(s) with separator '#{separator}'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+40:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Looking in #{log} I/O for line #{methods} method(s) with separator '#{separator}'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+41:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Looking in #{log} I/O for line matching #{classes} classe(s) with separator '#{separator}'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+42:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Looking in #{log} I/O for all lines&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+43:       <span class="ruby-identifier">classes</span> =<span class="ruby-identifier">classes</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">','</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span>
+44:       <span class="ruby-identifier">methods</span> =<span class="ruby-identifier">methods</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">','</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+45:       <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">downcase</span>} <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span>
+46:       <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">downcase</span>} <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+47:       <span class="ruby-identifier">line_number</span> = <span class="ruby-value">0</span>
+48:       <span class="ruby-identifier">line_match</span> = <span class="ruby-value">0</span>
+49:       <span class="ruby-constant">IO</span>.<span class="ruby-identifier">foreach</span>(<span class="ruby-identifier">log</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> 
+50:         <span class="ruby-identifier">line_number</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+51:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">line</span>,<span class="ruby-identifier">classes</span>,<span class="ruby-identifier">methods</span>, <span class="ruby-identifier">separator</span>)
+52:           <span class="ruby-identifier">puts</span> <span class="ruby-identifier">line</span> 
+53:           <span class="ruby-identifier">line_match</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+54:         <span class="ruby-keyword kw">end</span>
+55:         
+56:       <span class="ruby-keyword kw">end</span>
+57:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{line_match} lines matched on the #{line_number} lines in the log&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
+58:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="match-method" class="method-detail ">
+				<a name="method-i-match"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">match</span><span
+						class="method-args">(line,classes,methods,separator)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="match-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/easy_logger/easy_logger.rb, line 105</span>
+105:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">line</span>,<span class="ruby-identifier">classes</span>,<span class="ruby-identifier">methods</span>,<span class="ruby-identifier">separator</span>)
+106:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>].<span class="ruby-identifier">split</span>(<span class="ruby-identifier">separator</span>).<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>
+107:         <span class="ruby-identifier">methode</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>].<span class="ruby-identifier">split</span>(<span class="ruby-identifier">separator</span>)[<span class="ruby-value">2</span>].<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">downcase</span>
+108:         <span class="ruby-identifier">classe</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>].<span class="ruby-identifier">split</span>(<span class="ruby-identifier">separator</span>)[<span class="ruby-value">3</span>].<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">downcase</span>
+109:       
+110:         (<span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">classe</span>)) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">methode</span>))
+111:       <span class="ruby-keyword kw">else</span>
+112:         <span class="ruby-keyword kw">false</span>
+113:       <span class="ruby-keyword kw">end</span>
+114:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="tail-method" class="method-detail ">
+				<a name="method-i-tail"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">tail</span><span
+						class="method-args">(log, classes, methods, verbose, separator='|')</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Display the relevant <u>new</u> lines of the log matching the
+classes/methods
+</p>
+<p>
+@param (see <a href="EasyLogger.html#method-i-file">EasyLogger#file</a>)
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="tail-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/easy_logger/easy_logger.rb, line 63</span>
+63:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tail</span>(<span class="ruby-identifier">log</span>, <span class="ruby-identifier">classes</span>, <span class="ruby-identifier">methods</span>, <span class="ruby-identifier">verbose</span>, <span class="ruby-identifier">separator</span>=<span class="ruby-value str">'|'</span>)
+64:       <span class="ruby-identifier">result</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+65:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Tailing in #{log} I/O for line matching #{classes} classe(s) and #{methods} method(s) with separator '#{separator}'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+66:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Tailing in #{log} I/O for line #{methods} method(s) with separator '#{separator}'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+67:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Tailing in #{log} I/O for line matching #{classes} classe(s) with separator '#{separator}'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+68:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Tailing in #{log} I/O for all lines&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+69:       <span class="ruby-identifier">classes</span> =<span class="ruby-identifier">classes</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">','</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span>
+70:       <span class="ruby-identifier">methods</span> =<span class="ruby-identifier">methods</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">','</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+71:       <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">downcase</span>} <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">nil?</span>
+72:       <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">downcase</span>} <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">nil?</span>
+73:       <span class="ruby-ivar">@line_number</span> = <span class="ruby-value">0</span>
+74:       <span class="ruby-ivar">@line_match</span> = <span class="ruby-value">0</span>
+75:       <span class="ruby-comment cmt">#      interrupted = false</span>
+76:       <span class="ruby-identifier">trap</span>(<span class="ruby-value str">&quot;INT&quot;</span>) <span class="ruby-keyword kw">do</span>
+77:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@line_match} lines matched on the #{@line_number} lines in the log&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span> 
+78:         <span class="ruby-keyword kw">break</span>
+79:       <span class="ruby-keyword kw">end</span>
+80:       <span class="ruby-keyword kw">begin</span>
+81:         <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Tail</span><span class="ruby-operator">::</span><span class="ruby-constant">Logfile</span>.<span class="ruby-identifier">tail</span>(<span class="ruby-identifier">log</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+82:           <span class="ruby-ivar">@line_number</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+83:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">line</span>,<span class="ruby-identifier">classes</span>,<span class="ruby-identifier">methods</span>, <span class="ruby-identifier">separator</span>)
+84:             <span class="ruby-identifier">puts</span> <span class="ruby-identifier">line</span> 
+85:             <span class="ruby-ivar">@line_match</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+86:           <span class="ruby-keyword kw">end</span>
+87:           <span class="ruby-comment cmt">#        if interrupted</span>
+88:           <span class="ruby-comment cmt">#          break</span>
+89:           <span class="ruby-comment cmt">#        end</span>
+90:         <span class="ruby-keyword kw">end</span>
+91:       <span class="ruby-keyword kw">rescue</span>
+92:         <span class="ruby-keyword kw">nil</span>
+93:       <span class="ruby-keyword kw">end</span>
+94:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
